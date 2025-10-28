@@ -1,4 +1,17 @@
 {
+  "editor.defaultFormatter": "biomejs.biome",
+  "[html]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "tailwindCSS.classFunctions": ["cva", "tw", "clsx", "tw\\.[a-z-]+"],
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.scss": "tailwindcss"
+  },
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.formatOnSave": true,
