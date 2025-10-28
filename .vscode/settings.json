@@ -5,9 +5,10 @@
   },
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
-  "tailwindCSS.classFunctions": ["cva", "tw", "clsx", "tw\\.[a-z-]+"],
+  "tailwindCSS.classFunctions": ["cva", "tw", "clsx", "tv", "tw\\.[a-z-]+"],
   "files.associations": {
     "*.css": "tailwindcss",
     "*.scss": "tailwindcss"
