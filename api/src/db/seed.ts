@@ -33,6 +33,10 @@ function randomHeaders(contentType: string) {
 }
 
 async function seed() {
+  console.log('🌱 Seeding database...')
+
+  await db.delete(webhooks)
+
   const webhooksData = Array.from({ length: 60 }, () => {
     const method = faker.helpers.arrayElement(methods)
     const pathname = `/${faker.lorem.word()}/${faker.string.alphanumeric(6)}`
@@ -41,11 +45,15 @@ async function seed() {
 
     let body: string | null = null
     if (contentType === 'application/json') {
-      body = JSON.stringify({
-        id: faker.string.uuid(),
-        value: faker.lorem.words(6),
-        amount: faker.number.int({ min: 1, max: 10000 }),
-      })
+      body = JSON.stringify(
+        {
+          id: faker.string.uuid(),
+          value: faker.lorem.words(6),
+          amount: faker.number.int({ min: 1, max: 10000 }),
+        },
+        null,
+        2,
+      )
     } else if (contentType === 'application/x-www-form-urlencoded') {
       body = `a=${faker.lorem.word()}&b=${faker.lorem.word()}`
     } else if (contentType === 'text/plain') {
@@ -72,6 +80,15 @@ async function seed() {
   })
 
   await db.insert(webhooks).values(webhooksData)
+
+  console.log('✅ Database seeded successfully with 60 webhooks...')
 }
 
 seed()
+  .catch((error) => {
+    console.error('❌ Error seeding database: ', error)
+    process.exit(1)
+  })
+  .finally(() => {
+    process.exit(0)
+  })
