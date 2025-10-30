@@ -11,9 +11,15 @@ interface WebhooksListItem {
     pathname: string
     createdAt: Date
   }
+  isWebhookChecked: boolean
+  onWebhookChecked: (webhookId: string) => void
 }
 
-export function WebhooksListItem({ webhook }: WebhooksListItem) {
+export function WebhooksListItem({
+  webhook,
+  isWebhookChecked,
+  onWebhookChecked,
+}: WebhooksListItem) {
   const queryClient = useQueryClient()
 
   const { mutate: deleteWebhook } = useMutation({
@@ -32,7 +38,10 @@ export function WebhooksListItem({ webhook }: WebhooksListItem) {
   return (
     <div className="group rounded-lg transition-colors duration-150 hover:bg-zinc-700/30">
       <div className="flex items-start gap-3 px-4 py-2.5">
-        <Checkbox />
+        <Checkbox
+          onCheckedChange={() => onWebhookChecked(webhook.id)}
+          checked={isWebhookChecked}
+        />
         <Link
           to="/webhooks/$id"
           params={{ id: webhook.id }}
