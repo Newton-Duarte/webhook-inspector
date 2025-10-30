@@ -4,6 +4,7 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
     .default('development'),
+  GOOGLE_GENERATIVE_AI_API_KEY: z.string(),
   PORT: z.coerce.number().default(3333),
   DATABASE_URL: z.url(),
 })
